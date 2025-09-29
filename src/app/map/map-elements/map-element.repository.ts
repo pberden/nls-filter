@@ -8,6 +8,7 @@ import { FeedbackElement } from './feedback/feedback-element';
 import { of } from 'rxjs';
 import { GeoJsonFeatures$ } from './feedback/feedback-model';
 import { AdministrativeDivisionElement } from './administrative-division/administrative-division.element';
+import { RoadSectionRepository } from './speed-limit/road-section.repository';
 
 // mock data for feedback features
 // this should be replaced with a real data source in a real application
@@ -38,6 +39,7 @@ const feedbackFeatures$ = of({
 @Injectable({ providedIn: 'root' })
 export class PlaygroundMapElementRepository extends MapElementRepository<MapElementEnum> {
   readonly #maplibreCursorService = inject(MaplibreCursorService);
+  readonly #roadSectionRepository = inject(RoadSectionRepository);
 
   registerMapElements(map: Map) {
     const mapElementConfig = {
@@ -57,7 +59,7 @@ export class PlaygroundMapElementRepository extends MapElementRepository<MapElem
         ...mapElementConfig,
         elementId: MapElementEnum.SpeedLimit,
         elementOrder: 10,
-      }),
+      }, this.#roadSectionRepository),
       new FeedbackElement(
         {
           ...mapElementConfig,
