@@ -64,7 +64,8 @@
               "buildTarget": "nls-filter:build:production"
             },
             "development": {
-              "buildTarget": "nls-filter:build:development"
+              "buildTarget": "nls-filter:build:development",
+              "port": 4400
             }
           },
           "defaultConfiguration": "development"
